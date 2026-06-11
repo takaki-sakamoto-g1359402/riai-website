@@ -2,7 +2,7 @@
 
 Date: 2026-06-12
 
-This report records current local evidence for the Riai website before browser screenshot QA, GitHub push, and public deployment. It intentionally does not claim public availability or browser visual sign-off.
+This report records current local evidence for the Riai website before GitHub push and public deployment. It intentionally does not claim public availability.
 
 ## Verified Locally
 
@@ -10,7 +10,9 @@ This report records current local evidence for the Riai website before browser s
 - Latest local commit should be checked with `git log --oneline -1` before release.
 - Working tree should be checked with `git status --short` before release.
 - No Git remote was configured.
-- No screenshot file existed under `public/screenshots/`.
+- Browser QA screenshots were captured:
+  - `public/screenshots/riai-home.png`
+  - `public/screenshots/riai-mobile.png`
 - Static build artifacts existed under `dist/`.
 - Built asset references use relative paths in `dist/index.html`.
 - `dist/.nojekyll` exists for GitHub Pages compatibility.
@@ -71,21 +73,19 @@ dist/assets/index-sz-qz1K-.js   367.98 kB | gzip: 116.76 kB
   - localized document title, `html.lang`, and meta description updates
   - `prefers-reduced-motion` handling in CSS and Framer Motion config
 - The GitHub Pages workflow is manual-only through `workflow_dispatch`.
+- Browser QA opened `http://127.0.0.1:4175/` and verified:
+  - page title: `Riai | Transparent Autonomous Agents`
+  - no browser console warnings or errors
+  - Japanese language toggle updates `html.lang`, document title, and meta description
+  - Command Center tab click selects `Act`
+  - Arrow-key tab navigation moves from `Act` to `Reflect`
+  - mobile viewport exposes the menu button
 
 ## Not Yet Verified
 
-These items require explicit approval because they involve browser use or external publishing:
+These items require external publishing:
 
-- Browser visual QA
-- Desktop and mobile screenshot capture
-- README/community screenshot reference update
 - Public GitHub repository creation or selection
 - Git push
 - GitHub Pages deployment
 - Live URL verification
-
-Required approval phrase for the next step:
-
-```text
-Approve browser: open local preview and capture Riai screenshots
-```

@@ -7,7 +7,7 @@ Premium bilingual landing site and interactive command-center mock dashboard for
 - Local build: passing
 - Deployment URL: pending approval and deployment
 - GitHub repository: pending approval and push
-- Screenshot: pending browser capture
+- Screenshot: captured locally
 - GitHub Pages workflow: prepared locally
 
 ## Design Direction
@@ -66,11 +66,12 @@ npm run qa        # Run lint, build, validate, and smoke in release order
 
 ## Screenshots
 
-Screenshot capture is pending user approval to open a browser. Expected path:
+Browser QA screenshots are available at:
 
-```text
-public/screenshots/riai-home.png
-```
+![Riai desktop screenshot](public/screenshots/riai-home.png)
+
+Desktop: `public/screenshots/riai-home.png`
+Mobile: `public/screenshots/riai-mobile.png`
 
 ## Deployment
 

@@ -17,7 +17,7 @@ What is included:
 
 The design references were used only to study abstract patterns such as pacing, typography hierarchy, dashboard clarity, scroll rhythm, interaction density, and deployment polish. No layouts, imagery, copy, logos, animations, trade dress, or source code were copied.
 
-Screenshot: `public/screenshots/riai-home.png` after browser capture.
+Screenshot: `public/screenshots/riai-home.png`.
 
 Live URL: pending deployment.
 
@@ -48,7 +48,7 @@ Open questions:
 
 参考URLは、情報設計、タイポグラフィ階層、ダッシュボードの明瞭さ、スクロールのテンポ、インタラクション密度、公開品質といった抽象パターンの研究にのみ使いました。レイアウト、画像、コピー、ロゴ、アニメーション、トレードドレス、コードはコピーしていません。
 
-スクリーンショット: ブラウザ撮影後に `public/screenshots/riai-home.png` を追加予定。
+スクリーンショット: `public/screenshots/riai-home.png`。
 
 Live URL: デプロイ後に追記予定。
 

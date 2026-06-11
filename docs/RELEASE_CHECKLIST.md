@@ -12,6 +12,9 @@ This checklist tracks the remaining approval-gated steps needed to turn the loca
   - `GET /` returned `200 OK`
   - `GET /assets/riai-core.webp` returned `200 OK`
   - `GET /assets/riai-core.png` returned `200 OK`
+- Browser screenshot QA: completed locally at `http://127.0.0.1:4175/`
+  - `public/screenshots/riai-home.png`
+  - `public/screenshots/riai-mobile.png`
 - Hero WebP size: about `108 KB`
 - GitHub Pages workflow: prepared as manual `workflow_dispatch`
 
@@ -21,23 +24,23 @@ Do not perform these steps without explicit user approval.
 
 ### 1. Browser Screenshot QA
 
-Required approval phrase:
+Status: completed after approval.
+
+Original approval phrase:
 
 ```text
 Approve browser: open local preview and capture Riai screenshots
 ```
 
-After approval:
+Completed:
 
-1. Start production preview.
-2. Open the local preview in the browser.
-3. Verify desktop and mobile responsive layout.
-4. Verify `EN / JA` toggle.
-5. Verify Command Center phase tabs: `Plan`, `Act`, `Reflect`, `Learn`.
-6. Capture at least one screenshot to `public/screenshots/riai-home.png`.
-7. Update `README.md` and `docs/COMMUNITY_POST.md` with the screenshot path.
-8. Run `npm run qa`.
-9. Commit the screenshot and documentation update.
+1. Started production preview.
+2. Opened the local preview in the browser.
+3. Verified desktop and mobile responsive layout.
+4. Verified `EN / JA` toggle.
+5. Verified Command Center phase tabs and arrow-key navigation.
+6. Captured screenshots to `public/screenshots/`.
+7. Updated `README.md` and `docs/COMMUNITY_POST.md` with screenshot paths.
 
 ### 2. GitHub Repository And Push
 
