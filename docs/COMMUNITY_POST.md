@@ -19,9 +19,9 @@ The design references were used only to study abstract patterns such as pacing, 
 
 Screenshot: `public/screenshots/riai-home.png`.
 
-Live URL: pending deployment.
+Live URL: https://takaki-sakamoto-g1359402.github.io/riai-website/
 
-Deployment path: GitHub Pages workflow is prepared locally and can be run manually after deployment approval.
+GitHub repository: https://github.com/takaki-sakamoto-g1359402/riai-website
 
 Release checklist: `docs/RELEASE_CHECKLIST.md`.
 
@@ -50,9 +50,9 @@ Open questions:
 
 スクリーンショット: `public/screenshots/riai-home.png`。
 
-Live URL: デプロイ後に追記予定。
+Live URL: https://takaki-sakamoto-g1359402.github.io/riai-website/
 
-デプロイ経路: GitHub Pages workflow はローカルで準備済みで、デプロイ承認後に手動実行できます。
+GitHub repository: https://github.com/takaki-sakamoto-g1359402/riai-website
 
 リリースチェックリスト: `docs/RELEASE_CHECKLIST.md`。
 

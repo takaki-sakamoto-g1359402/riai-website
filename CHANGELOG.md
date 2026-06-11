@@ -14,3 +14,4 @@
 - Optimized PNG hero fallback and added fallback asset size validation.
 - Added non-browser production preview smoke check for HTML and hero asset delivery.
 - Added ordered `qa` release check, Node 22 runtime note, stricter manual workflow validation, base-safe hero asset URLs, and tighter approval gates.
+- Deployed the site to GitHub Pages and recorded live desktop/mobile verification evidence.

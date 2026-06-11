@@ -2,14 +2,16 @@
 
 Date: 2026-06-12
 
-This report records current local evidence for the Riai website before GitHub push and public deployment. It intentionally does not claim public availability.
+This report records local and live evidence for the Riai website release.
 
 ## Verified Locally
 
 - Repository path: `/Users/sakamototakaki/Documents/New project/riai-website`
 - Latest local commit should be checked with `git log --oneline -1` before release.
 - Working tree should be checked with `git status --short` before release.
-- No Git remote was configured.
+- Git remote: `git@github.com:takaki-sakamoto-g1359402/riai-website.git`
+- Public repository: https://github.com/takaki-sakamoto-g1359402/riai-website
+- Live URL: https://takaki-sakamoto-g1359402.github.io/riai-website/
 - Browser QA screenshots were captured:
   - `public/screenshots/riai-home.png`
   - `public/screenshots/riai-mobile.png`
@@ -80,10 +82,21 @@ dist/assets/index-sz-qz1K-.js   367.98 kB | gzip: 116.76 kB
   - Command Center tab click selects `Act`
   - Arrow-key tab navigation moves from `Act` to `Reflect`
   - mobile viewport exposes the menu button
+- Live GitHub Pages QA opened `https://takaki-sakamoto-g1359402.github.io/riai-website/` and verified:
+  - page title: `Riai | Transparent Autonomous Agents`
+  - no browser console warnings or errors
+  - first meaningful content renders, including `Riai`
+  - no framework error overlay
+  - Japanese language toggle updates `html.lang` and document title
+  - Command Center phase click selects `実行`
+  - Arrow-key tab navigation moves from `実行` to `内省`
+  - mobile viewport `390x844` exposes `Open menu`
+  - mobile menu opens with `aria-expanded="true"`
+  - no horizontal overflow in the tested mobile viewport
+  - live HTTP check returned `200 OK`
 
-## Not Yet Verified
+## Deployment Evidence
 
-These items require live deployment verification:
-
-- GitHub Pages deployment
-- Live URL verification
+- GitHub Pages source: GitHub Actions
+- Successful workflow run: https://github.com/takaki-sakamoto-g1359402/riai-website/actions/runs/27371001274
+- Successful deploy job: https://github.com/takaki-sakamoto-g1359402/riai-website/actions/runs/27371001274/job/80883030399

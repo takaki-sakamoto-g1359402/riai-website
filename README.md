@@ -5,10 +5,10 @@ Premium bilingual landing site and interactive command-center mock dashboard for
 ## Status
 
 - Local build: passing
-- Deployment URL: pending approval and deployment
-- GitHub repository: pushed to `takaki-sakamoto-g1359402/riai-website`
+- Deployment URL: https://takaki-sakamoto-g1359402.github.io/riai-website/
+- GitHub repository: https://github.com/takaki-sakamoto-g1359402/riai-website
 - Screenshot: captured locally
-- GitHub Pages workflow: prepared locally
+- GitHub Pages workflow: passing on `main`
 
 ## Design Direction
 
@@ -75,22 +75,27 @@ Mobile: `public/screenshots/riai-mobile.png`
 
 ## Deployment
 
-The site is static and can be deployed from `dist/` to GitHub Pages, Vercel, Netlify, or Cloudflare Pages.
+The site is live on GitHub Pages:
+
+https://takaki-sakamoto-g1359402.github.io/riai-website/
+
+The site is static and can also be deployed from `dist/` to Vercel, Netlify, or Cloudflare Pages.
 
 `vite.config.ts` uses a relative build base so the generated assets work on GitHub Pages project URLs such as `/repository-name/` as well as custom domains.
 Run `npm run build` before `npm run validate` because validation checks the generated `dist/` output.
 
 Approval-gated release steps are tracked in [`docs/RELEASE_CHECKLIST.md`](docs/RELEASE_CHECKLIST.md).
 Current non-browser QA evidence is tracked in [`docs/LOCAL_QA_REPORT.md`](docs/LOCAL_QA_REPORT.md).
-`npm run smoke` verifies the local production preview without opening a browser; visual QA still requires the browser approval gate. Use `npm run qa` before release because it rebuilds `dist/` before validation and smoke checks.
+`npm run smoke` verifies the local production preview without opening a browser. Use `npm run qa` before release because it rebuilds `dist/` before validation and smoke checks.
 
-Recommended GitHub Pages flow after approval:
+GitHub Pages deployment is handled by `.github/workflows/pages.yml` on pushes to `main` and manual `workflow_dispatch`. The workflow runs `npm ci`, `npm run lint`, `npm run build`, `npm run validate`, and `npm run smoke`, then deploys the generated `dist/` artifact.
 
-1. Push this repository to GitHub.
-2. Replace the internal community CTA with an approved public repository or discussion URL if that community destination is ready.
-3. In the repository settings, enable GitHub Pages with **GitHub Actions** as the source if GitHub has not already enabled it during the first deployment.
-4. Push to `main` or manually run `.github/workflows/pages.yml` after deployment approval. The workflow runs `npm ci`, `npm run lint`, `npm run build`, `npm run validate`, and `npm run smoke`.
-5. Verify the public URL opens and the Command Center works.
+Latest verified deployment evidence:
+
+- GitHub Pages source: GitHub Actions
+- Successful workflow run: https://github.com/takaki-sakamoto-g1359402/riai-website/actions/runs/27371001274
+- Live URL check: `200 OK`
+- Browser QA: live desktop and mobile views loaded without console warnings or errors
 
 ## Legal Note
 

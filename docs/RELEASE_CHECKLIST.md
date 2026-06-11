@@ -5,6 +5,8 @@ This checklist tracks the remaining approval-gated steps needed to turn the loca
 ## Current Local Evidence
 
 - Repository path: `/Users/sakamototakaki/Documents/New project/riai-website`
+- Public repository: https://github.com/takaki-sakamoto-g1359402/riai-website
+- Live URL: https://takaki-sakamoto-g1359402.github.io/riai-website/
 - Latest local commit: run `git log --oneline -1` in this repository before release.
 - Required local release check:
   - `npm run qa`
@@ -61,52 +63,28 @@ Completed:
 
 ### 3. GitHub Pages Deployment
 
-Required approval phrase for repository settings:
+Status: completed after approval.
 
-```text
-Approve GitHub Settings: enable GitHub Pages Actions for <owner>/<repo>
-```
+Completed:
 
-Deployment workflow status: approved through the user's blanket approval.
-
-Original approval phrase for deployment workflow:
-
-```text
-Approve deploy: run GitHub Pages workflow for <owner>/<repo>
-```
-
-Required approval phrase for live browser verification:
-
-```text
-Approve browser: open live Riai URL <url> and verify deployment
-```
-
-Required approval phrase for final documentation push:
-
-```text
-Approve GitHub: push final Riai deployment docs to <owner>/<repo>
-```
-
-After approval:
-
-1. Enable GitHub Pages with GitHub Actions as the source only after the GitHub Settings approval phrase.
-2. Run `.github/workflows/pages.yml` after approval through `main` push or manual dispatch.
-3. Wait for the workflow to complete.
-4. Open and verify the live URL only after the live browser verification approval phrase.
-5. Verify the live page loads assets and Command Center interactions.
-6. Record the live URL in `README.md` and `docs/COMMUNITY_POST.md`.
-7. Commit final documentation updates locally.
-8. Push final documentation updates only after the final documentation push approval phrase.
+1. Enabled GitHub Pages with GitHub Actions as the source in repository settings.
+2. Reran `.github/workflows/pages.yml` from `main`.
+3. Confirmed successful workflow run:
+   - https://github.com/takaki-sakamoto-g1359402/riai-website/actions/runs/27371001274
+4. Verified the live URL returns `200 OK`:
+   - https://takaki-sakamoto-g1359402.github.io/riai-website/
+5. Verified the live page in browser on desktop and mobile viewports.
+6. Recorded live URL and deployment evidence in release documentation.
 
 ## Completion Evidence Needed
 
 The goal is complete only when all of the following are proven:
 
-- Public live URL opens successfully.
-- GitHub repository URL is available.
-- Latest commit is pushed.
-- README contains setup, design direction, interactions, screenshot path, deployment URL, and legal note.
-- Community post contains English and Japanese devlog with screenshot and live URL references.
-- Local and CI checks pass.
-- Local preview smoke check passes.
-- Browser verification confirms the live site works.
+- [x] Public live URL opens successfully.
+- [x] GitHub repository URL is available.
+- [x] Latest commit is pushed.
+- [x] README contains setup, design direction, interactions, screenshot path, deployment URL, and legal note.
+- [x] Community post contains English and Japanese devlog with screenshot and live URL references.
+- [x] Local and CI checks pass.
+- [x] Local preview smoke check passes.
+- [x] Browser verification confirms the live site works.
