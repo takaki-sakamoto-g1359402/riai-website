@@ -21,6 +21,8 @@ Screenshot: `public/screenshots/riai-home.png` after browser capture.
 
 Live URL: pending deployment.
 
+Deployment path: GitHub Pages workflow is prepared locally and can be run manually after deployment approval.
+
 Open questions:
 
 - What should an inspectable agent memory model expose first?
@@ -47,6 +49,8 @@ Open questions:
 スクリーンショット: ブラウザ撮影後に `public/screenshots/riai-home.png` を追加予定。
 
 Live URL: デプロイ後に追記予定。
+
+デプロイ経路: GitHub Pages workflow はローカルで準備済みで、デプロイ承認後に手動実行できます。
 
 考えたい問い:
 

@@ -8,6 +8,8 @@ const requiredFiles = [
   "src/content.ts",
   "src/index.css",
   "public/assets/riai-core.webp",
+  "public/.nojekyll",
+  ".github/workflows/pages.yml",
   "README.md",
   "LICENSE",
   "CHANGELOG.md",

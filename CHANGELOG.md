@@ -7,3 +7,4 @@
 - Added interactive Riai Command Center mock dashboard.
 - Added lightweight generated hero asset with WebP optimization.
 - Added project documentation, validation script, and release notes.
+- Added GitHub Pages deployment workflow and relative Vite asset base.

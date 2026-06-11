@@ -8,6 +8,7 @@ Premium bilingual landing site and interactive command-center mock dashboard for
 - Deployment URL: pending approval and deployment
 - GitHub repository: pending approval and push
 - Screenshot: pending browser capture
+- GitHub Pages workflow: prepared locally
 
 ## Design Direction
 
@@ -69,11 +70,14 @@ public/screenshots/riai-home.png
 
 The site is static and can be deployed from `dist/` to GitHub Pages, Vercel, Netlify, or Cloudflare Pages.
 
+`vite.config.ts` uses a relative build base so the generated assets work on GitHub Pages project URLs such as `/repository-name/` as well as custom domains.
+
 Recommended GitHub Pages flow after approval:
 
 1. Push this repository to GitHub.
-2. Configure Pages to deploy from a GitHub Actions workflow or from the generated static output.
-3. Verify the public URL opens and the Command Center works.
+2. In the repository settings, enable GitHub Pages with **GitHub Actions** as the source.
+3. Manually run `.github/workflows/pages.yml` after deployment approval. The workflow runs `npm ci`, `npm run lint`, `npm run build`, and `npm run validate`.
+4. Verify the public URL opens and the Command Center works.
 
 ## Legal Note
 
