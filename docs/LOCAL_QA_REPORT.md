@@ -51,8 +51,8 @@ The latest observed build output was:
 
 ```text
 dist/index.html                   0.66 kB | gzip:   0.39 kB
-dist/assets/index-Dlyxafgd.css   20.55 kB | gzip:   5.01 kB
-dist/assets/index-BcMbXltV.js   366.64 kB | gzip: 116.20 kB
+dist/assets/index-v83BkWPy.css   20.45 kB | gzip:   5.00 kB
+dist/assets/index-DTnIHjVc.js   367.81 kB | gzip: 116.68 kB
 ```
 
 ## Feature Evidence From Source
@@ -65,7 +65,10 @@ dist/assets/index-BcMbXltV.js   366.64 kB | gzip: 116.20 kB
   - semantic landmarks
   - skip link
   - keyboard-focusable controls
+  - phase tab arrow-key navigation
   - `aria-label`, `aria-expanded`, `aria-selected`, and tab roles where appropriate
+  - progressbar semantics on agent progress indicators
+  - localized document title, `html.lang`, and meta description updates
   - `prefers-reduced-motion` handling in CSS and Framer Motion config
 - The GitHub Pages workflow is manual-only through `workflow_dispatch`.
 

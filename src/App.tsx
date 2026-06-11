@@ -20,7 +20,10 @@ function cx(...classes: Array<string | false | null | undefined>) {
 }
 
 function assetUrl(path: string) {
-  return `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
+  const base = import.meta.env.BASE_URL || "./";
+  const normalizedBase = base.endsWith("/") ? base : `${base}/`;
+
+  return `${normalizedBase}${path.replace(/^\/+/, "")}`;
 }
 
 export default function App() {
@@ -32,6 +35,9 @@ export default function App() {
   useEffect(() => {
     document.documentElement.lang = lang;
     document.title = t(copy.meta.title, lang);
+    document
+      .querySelector<HTMLMetaElement>('meta[name="description"]')
+      ?.setAttribute("content", t(copy.meta.description, lang));
   }, [lang]);
 
   const activePhaseData = useMemo(
@@ -54,7 +60,7 @@ export default function App() {
           setLang={setLang}
           setMenuOpen={setMenuOpen}
         />
-        <main id="main">
+        <main id="main" tabIndex={-1}>
           <Hero lang={lang} />
           <Mission lang={lang} />
           <CommandCenter
@@ -251,9 +257,11 @@ function Hero({ lang }: { lang: Lang }) {
             <picture>
               <source srcSet={coreWebp} type="image/webp" />
               <img
-                className="aspect-[5/6] h-auto w-full object-cover"
+                className="aspect-[2/3] h-auto w-full object-cover"
                 src={corePng}
                 alt={t(copy.hero.visualAlt, lang)}
+                width={960}
+                height={1440}
                 decoding="async"
                 fetchPriority="high"
               />
@@ -349,6 +357,36 @@ function CommandCenter({
     { icon: ExternalLink, label: command.sidebar.memory, active: false }
   ];
 
+  function selectPhase(nextPhase: PhaseId) {
+    setActivePhase(nextPhase);
+    window.requestAnimationFrame(() => {
+      document.getElementById(`phase-tab-${nextPhase}`)?.focus();
+    });
+  }
+
+  function handlePhaseKeyDown(event: React.KeyboardEvent<HTMLButtonElement>, phaseId: PhaseId) {
+    const currentIndex = phaseOrder.indexOf(phaseId);
+    const lastIndex = phaseOrder.length - 1;
+    let nextIndex: number | null = null;
+
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      nextIndex = currentIndex === lastIndex ? 0 : currentIndex + 1;
+    } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      nextIndex = currentIndex === 0 ? lastIndex : currentIndex - 1;
+    } else if (event.key === "Home") {
+      nextIndex = 0;
+    } else if (event.key === "End") {
+      nextIndex = lastIndex;
+    }
+
+    if (nextIndex === null) {
+      return;
+    }
+
+    event.preventDefault();
+    selectPhase(phaseOrder[nextIndex]);
+  }
+
   return (
     <section id="command" className="bg-[#f8f7f2] py-20">
       <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
@@ -379,19 +417,26 @@ function CommandCenter({
                 {sidebarItems.map((item) => {
                   const TypedIcon = item.icon;
                   return (
-                    <a
-                      key={t(item.label, "en")}
-                      className={cx(
-                        "flex items-center gap-3 rounded-md px-3 py-3 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-celadon",
-                        item.active
-                          ? "bg-white/13 text-white"
-                          : "text-white/72 hover:bg-white/9 hover:text-white"
-                      )}
-                      href="#command"
-                    >
-                      <TypedIcon size={17} aria-hidden="true" />
-                      {t(item.label, lang)}
-                    </a>
+                    item.active ? (
+                      <a
+                        key={t(item.label, "en")}
+                        className="flex items-center gap-3 rounded-md bg-white/13 px-3 py-3 text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-celadon"
+                        href="#command"
+                        aria-current="page"
+                      >
+                        <TypedIcon size={17} aria-hidden="true" />
+                        {t(item.label, lang)}
+                      </a>
+                    ) : (
+                      <span
+                        key={t(item.label, "en")}
+                        className="flex items-center gap-3 rounded-md px-3 py-3 text-white/58"
+                        aria-disabled="true"
+                      >
+                        <TypedIcon size={17} aria-hidden="true" />
+                        {t(item.label, lang)}
+                      </span>
+                    )
                   );
                 })}
               </nav>
@@ -427,7 +472,9 @@ function CommandCenter({
                         aria-selected={active}
                         aria-controls="phase-panel"
                         id={`phase-tab-${phase.id}`}
+                        tabIndex={active ? 0 : -1}
                         onClick={() => setActivePhase(phase.id)}
+                        onKeyDown={(event) => handlePhaseKeyDown(event, phase.id)}
                       >
                         <Icon size={17} aria-hidden="true" />
                         {t(phase.label, lang)}
@@ -603,7 +650,14 @@ function AgentCard({
           <span>{t(command.labels.progress, lang)}</span>
           <span>{agent.progress}%</span>
         </div>
-        <div className="h-2 overflow-hidden rounded bg-mist">
+        <div
+          className="h-2 overflow-hidden rounded bg-mist"
+          role="progressbar"
+          aria-label={`${t(agent.name, lang)} ${t(command.labels.progress, lang)}`}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={agent.progress}
+        >
           <div
             className={cx("h-full rounded", toneClass)}
             style={{ width: `${agent.progress}%` }}

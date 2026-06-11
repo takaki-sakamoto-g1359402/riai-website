@@ -83,6 +83,10 @@ export const copy = {
     title: {
       en: "Riai | Transparent Autonomous Agents",
       ja: "Riai | 透明な自律エージェント"
+    },
+    description: {
+      en: "Riai is a calm, transparent autonomous-agent concept for planning, acting, reflecting, and learning with visible safety controls.",
+      ja: "Riai は、見える安全制御のもとで計画、実行、内省、学習を扱う、落ち着いた透明な自律エージェント構想です。"
     }
   },
   a11y: {
