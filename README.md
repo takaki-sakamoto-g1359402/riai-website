@@ -60,6 +60,7 @@ npm run qa        # Run lint, build, validate, and smoke in release order
 - `EN / JA` language toggle changes all primary copy.
 - Command Center phase tabs switch between `Plan`, `Act`, `Reflect`, and `Learn`.
 - Dashboard panels expose simulated active agents, safety checks, memory, rule status, task timeline, and activity.
+- The community CTA currently returns visitors to the Command Center demo until a real public repository or discussion URL is approved.
 - Navigation uses semantic anchors and keyboard-focusable controls.
 - Motion respects `prefers-reduced-motion`.
 
@@ -85,9 +86,10 @@ Current non-browser QA evidence is tracked in [`docs/LOCAL_QA_REPORT.md`](docs/L
 Recommended GitHub Pages flow after approval:
 
 1. Push this repository to GitHub.
-2. In the repository settings, enable GitHub Pages with **GitHub Actions** as the source.
-3. Manually run `.github/workflows/pages.yml` after deployment approval. The workflow runs `npm ci`, `npm run lint`, `npm run build`, `npm run validate`, and `npm run smoke`.
-4. Verify the public URL opens and the Command Center works.
+2. Replace the internal community CTA with an approved public repository or discussion URL if that community destination is ready.
+3. In the repository settings, enable GitHub Pages with **GitHub Actions** as the source.
+4. Manually run `.github/workflows/pages.yml` after deployment approval. The workflow runs `npm ci`, `npm run lint`, `npm run build`, `npm run validate`, and `npm run smoke`.
+5. Verify the public URL opens and the Command Center works.
 
 ## Legal Note
 

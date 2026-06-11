@@ -319,7 +319,7 @@ export const copy = {
       en: "Riai is early by design. The current site demonstrates the product language, safety posture, and command-center interaction model before real account integrations.",
       ja: "Riai は意図的に初期段階です。現在のサイトは実アカウント連携の前に、プロダクト言語、安全姿勢、Command Centerの操作モデルを示します。"
     },
-    primary: { en: "Join the community", ja: "コミュニティに参加" },
+    primary: { en: "Inspect the demo", ja: "デモを確認" },
     secondary: { en: "Review roadmap", ja: "ロードマップを見る" }
   },
   footer: {

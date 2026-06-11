@@ -52,8 +52,9 @@ After approval:
 1. Create or select the public GitHub repository.
 2. Add the repository as `origin`.
 3. Push `main`.
-4. Record the repository URL in `README.md`.
-5. Commit documentation changes if needed.
+4. If a real public discussion destination is ready, replace the internal community CTA with that approved URL.
+5. Record the repository URL in `README.md`.
+6. Commit documentation or CTA changes if needed.
 
 ### 3. GitHub Pages Deployment
 

@@ -52,7 +52,7 @@ The latest observed build output was:
 ```text
 dist/index.html                   0.66 kB | gzip:   0.39 kB
 dist/assets/index-Dlyxafgd.css   20.55 kB | gzip:   5.01 kB
-dist/assets/index-hE1zZS0y.js   366.68 kB | gzip: 116.23 kB
+dist/assets/index-BcMbXltV.js   366.64 kB | gzip: 116.20 kB
 ```
 
 ## Feature Evidence From Source

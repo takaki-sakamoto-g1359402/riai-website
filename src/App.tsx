@@ -821,11 +821,10 @@ function CommunityCta({ lang }: { lang: Lang }) {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
                 className="inline-flex items-center justify-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-bold text-ink transition hover:bg-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-celadon"
-                href="https://github.com/"
-                rel="noreferrer"
+                href="#command"
               >
                 {t(copy.cta.primary, lang)}
-                <ExternalLink size={16} aria-hidden="true" />
+                <ArrowRight size={16} aria-hidden="true" />
               </a>
               <a
                 className="inline-flex items-center justify-center gap-2 rounded-md border border-white/22 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-celadon"
