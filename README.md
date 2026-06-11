@@ -50,7 +50,7 @@ npm run dev       # Start development server
 npm run build     # Type-check and create static dist/
 npm run preview   # Preview the production build locally
 npm run lint      # Run ESLint
-npm run validate  # Confirm key files, scripts, dist output, Pages workflow, and hero asset budgets
+npm run validate  # Confirm files, scripts, dist output, Pages workflow, accessibility gates, and asset budgets
 npm run smoke     # Start production preview and verify HTML/assets over HTTP
 npm run qa        # Run lint, build, validate, and smoke in release order
 ```

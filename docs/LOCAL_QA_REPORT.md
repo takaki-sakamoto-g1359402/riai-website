@@ -33,7 +33,7 @@ npm run smoke
 npm run qa
 ```
 
-`npm run validate` now checks required source files, required package scripts, generated `dist/` output, relative build asset references, manual-only GitHub Pages workflow settings, lightweight WebP size, PNG fallback size, and the preview smoke script.
+`npm run validate` now checks required source files, required package scripts, generated `dist/` output, relative build asset references, manual-only GitHub Pages workflow settings, accessibility regression gates, public-CTA guardrails, lightweight WebP size, PNG fallback size, and the preview smoke script.
 
 `npm run smoke` starts a local Vite production preview, verifies the landing HTML, and confirms the WebP and PNG hero assets return `200 OK` with expected content types and size budgets. It does not open a browser and does not replace visual QA.
 
@@ -43,7 +43,7 @@ The latest local `npm run qa` pass observed before this report update completed 
 
 ```text
 eslint . && tsc -b && vite build && node ./scripts/validate.mjs && node ./scripts/smoke-preview.mjs
-Validation passed: files, scripts, dist output, Pages workflow, and hero asset are release-ready locally.
+Validation passed: files, scripts, dist output, Pages workflow, accessibility gates, and hero asset are release-ready locally.
 Smoke preview passed at http://127.0.0.1:4174
 ```
 
@@ -52,7 +52,7 @@ The latest observed build output was:
 ```text
 dist/index.html                   0.66 kB | gzip:   0.39 kB
 dist/assets/index-v83BkWPy.css   20.45 kB | gzip:   5.00 kB
-dist/assets/index-DTnIHjVc.js   367.81 kB | gzip: 116.68 kB
+dist/assets/index-sz-qz1K-.js   367.98 kB | gzip: 116.76 kB
 ```
 
 ## Feature Evidence From Source

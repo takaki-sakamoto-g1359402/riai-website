@@ -470,8 +470,9 @@ export const command = {
   ],
   timeline: [
     { label: { en: "Understand goal", ja: "目標理解" }, detail: { en: "Clarify brand, scope, and constraints", ja: "ブランド、範囲、制約を確認" }, state: "done" },
-    { label: { en: "Decompose plan", ja: "計画分解" }, detail: { en: "Split landing, dashboard, docs, release", ja: "ランディング、ダッシュボード、 docs、releaseに分割" }, state: "active" },
-    { label: { en: "Run checks", ja: "検証実行" }, detail: { en: "Build, lint, validate, screenshot", ja: "build、lint、validate、screenshot" }, state: "pending" },
+    { label: { en: "Decompose plan", ja: "計画分解" }, detail: { en: "Split landing, dashboard, docs, release", ja: "ランディング、ダッシュボード、 docs、releaseに分割" }, state: "done" },
+    { label: { en: "Local checks", ja: "ローカル検証" }, detail: { en: "Build, lint, validate, and smoke passed", ja: "build、lint、validate、smoke は通過済み" }, state: "done" },
+    { label: { en: "Browser screenshot QA", ja: "ブラウザ撮影QA" }, detail: { en: "Await explicit browser approval", ja: "ブラウザ承認待ち" }, state: "active" },
     { label: { en: "Publish with approval", ja: "承認後に公開" }, detail: { en: "Push and deploy only after consent", ja: "承認後のみpushとdeploy" }, state: "pending" }
   ],
   rules: [

@@ -100,9 +100,51 @@ if (!pagesWorkflow.includes("npm run lint") || !pagesWorkflow.includes("npm run 
 }
 
 const appSource = readFileSync(join(root, "src/App.tsx"), "utf8");
+const contentSource = readFileSync(join(root, "src/content.ts"), "utf8");
+const indexSource = readFileSync(join(root, "index.html"), "utf8");
 
 if (appSource.includes('"/assets/') || appSource.includes("'/assets/")) {
   console.error("src/App.tsx must not use root-absolute /assets paths; use import.meta.env.BASE_URL-safe asset paths.");
+  process.exit(1);
+}
+
+if (!appSource.includes('base.endsWith("/")') || !appSource.includes("path.replace(/^\\/+/, \"\")")) {
+  console.error("assetUrl must normalize BASE_URL and strip leading slashes from asset paths.");
+  process.exit(1);
+}
+
+if (appSource.includes('href="https://github.com/"')) {
+  console.error("Do not link the community CTA to the generic GitHub homepage before a real public repo or discussion URL is approved.");
+  process.exit(1);
+}
+
+if (!contentSource.includes("description:") || !appSource.includes("copy.meta.description") || !indexSource.includes("Riai is a calm, transparent autonomous-agent concept")) {
+  console.error("Localized metadata must include a source description, initial HTML description, and runtime language updates.");
+  process.exit(1);
+}
+
+if (!appSource.includes('<main id="main" tabIndex={-1}>')) {
+  console.error("The skip-link target main element must be programmatically focusable.");
+  process.exit(1);
+}
+
+if (!appSource.includes("function handlePhaseKeyDown") || !appSource.includes('onKeyDown={(event) => handlePhaseKeyDown(event, phase.id)}') || !appSource.includes("tabIndex={active ? 0 : -1}")) {
+  console.error("Command Center phase tabs must keep arrow-key navigation and roving tabIndex behavior.");
+  process.exit(1);
+}
+
+if (!appSource.includes('role="progressbar"') || !appSource.includes("aria-valuenow={agent.progress}")) {
+  console.error("Agent progress indicators must expose progressbar semantics.");
+  process.exit(1);
+}
+
+if (!appSource.includes('aria-disabled="true"') || !appSource.includes('aria-current="page"')) {
+  console.error("Command Center sidebar must avoid focusable no-op links and mark the active item.");
+  process.exit(1);
+}
+
+if (!appSource.includes("width={960}") || !appSource.includes("height={1440}") || !appSource.includes("aspect-[2/3]")) {
+  console.error("Hero image must keep explicit dimensions and the source asset aspect ratio.");
   process.exit(1);
 }
 
@@ -129,4 +171,4 @@ if (!distIndex.includes('src="./assets/') || !distIndex.includes('href="./assets
   process.exit(1);
 }
 
-console.log("Validation passed: files, scripts, dist output, Pages workflow, and hero asset are release-ready locally.");
+console.log("Validation passed: files, scripts, dist output, Pages workflow, accessibility gates, and hero asset are release-ready locally.");
