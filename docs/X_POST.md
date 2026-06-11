@@ -1,6 +1,14 @@
 # X Post Draft
 
-Use this draft only after final user confirmation. The live URL is already inserted.
+Published on X after final user confirmation.
+
+Published URL:
+
+```text
+https://x.com/re_a_takaki/status/2065153105684271113
+```
+
+Posted text:
 
 ```text
 Riai のWebサイトを公開しました。
