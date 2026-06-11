@@ -28,6 +28,8 @@ npm run build
 npm run validate
 ```
 
+`npm run validate` now checks required source files, required package scripts, generated `dist/` output, relative build asset references, manual-only GitHub Pages workflow settings, and the lightweight hero asset size.
+
 The latest observed build output was:
 
 ```text

@@ -1,4 +1,4 @@
-import { existsSync, statSync } from "node:fs";
+import { existsSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 const requiredFiles = [
@@ -38,4 +38,55 @@ if (heroAsset.size > maxAssetBytes) {
   process.exit(1);
 }
 
-console.log("Validation passed: required files exist and hero asset is lightweight.");
+const packageJson = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
+const requiredScripts = ["dev", "build", "preview", "lint", "validate"];
+const missingScripts = requiredScripts.filter((script) => !packageJson.scripts?.[script]);
+
+if (missingScripts.length > 0) {
+  console.error("Missing package scripts:");
+  for (const script of missingScripts) {
+    console.error(`- ${script}`);
+  }
+  process.exit(1);
+}
+
+const pagesWorkflow = readFileSync(join(root, ".github/workflows/pages.yml"), "utf8");
+
+if (!pagesWorkflow.includes("workflow_dispatch:")) {
+  console.error("GitHub Pages workflow must remain manually triggered with workflow_dispatch.");
+  process.exit(1);
+}
+
+if (/^\s*push:/m.test(pagesWorkflow)) {
+  console.error("GitHub Pages workflow must not deploy automatically on push before release approval.");
+  process.exit(1);
+}
+
+if (!pagesWorkflow.includes("npm run lint") || !pagesWorkflow.includes("npm run build") || !pagesWorkflow.includes("npm run validate")) {
+  console.error("GitHub Pages workflow must run lint, build, and validate.");
+  process.exit(1);
+}
+
+const distFiles = [
+  "dist/index.html",
+  "dist/.nojekyll",
+  "dist/assets/riai-core.webp"
+];
+const missingDist = distFiles.filter((file) => !existsSync(join(root, file)));
+
+if (missingDist.length > 0) {
+  console.error("Missing dist files. Run npm run build before npm run validate:");
+  for (const file of missingDist) {
+    console.error(`- ${file}`);
+  }
+  process.exit(1);
+}
+
+const distIndex = readFileSync(join(root, "dist/index.html"), "utf8");
+
+if (!distIndex.includes('src="./assets/') || !distIndex.includes('href="./assets/')) {
+  console.error("dist/index.html should use relative asset references for GitHub Pages project URLs.");
+  process.exit(1);
+}
+
+console.log("Validation passed: files, scripts, dist output, Pages workflow, and hero asset are release-ready locally.");

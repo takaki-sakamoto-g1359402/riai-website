@@ -47,7 +47,7 @@ npm run dev       # Start development server
 npm run build     # Type-check and create static dist/
 npm run preview   # Preview the production build locally
 npm run lint      # Run ESLint
-npm run validate  # Confirm key files and lightweight hero asset
+npm run validate  # Confirm key files, scripts, dist output, Pages workflow, and lightweight hero asset
 ```
 
 ## Interactions
@@ -71,6 +71,7 @@ public/screenshots/riai-home.png
 The site is static and can be deployed from `dist/` to GitHub Pages, Vercel, Netlify, or Cloudflare Pages.
 
 `vite.config.ts` uses a relative build base so the generated assets work on GitHub Pages project URLs such as `/repository-name/` as well as custom domains.
+Run `npm run build` before `npm run validate` because validation checks the generated `dist/` output.
 
 Approval-gated release steps are tracked in [`docs/RELEASE_CHECKLIST.md`](docs/RELEASE_CHECKLIST.md).
 Current non-browser QA evidence is tracked in [`docs/LOCAL_QA_REPORT.md`](docs/LOCAL_QA_REPORT.md).
