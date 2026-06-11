@@ -73,6 +73,7 @@ The site is static and can be deployed from `dist/` to GitHub Pages, Vercel, Net
 `vite.config.ts` uses a relative build base so the generated assets work on GitHub Pages project URLs such as `/repository-name/` as well as custom domains.
 
 Approval-gated release steps are tracked in [`docs/RELEASE_CHECKLIST.md`](docs/RELEASE_CHECKLIST.md).
+Current non-browser QA evidence is tracked in [`docs/LOCAL_QA_REPORT.md`](docs/LOCAL_QA_REPORT.md).
 
 Recommended GitHub Pages flow after approval:
 

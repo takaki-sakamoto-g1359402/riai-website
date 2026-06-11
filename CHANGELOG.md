@@ -9,3 +9,4 @@
 - Added project documentation, validation script, and release notes.
 - Added GitHub Pages deployment workflow and relative Vite asset base.
 - Added release checklist for browser QA, GitHub push, deployment, and live verification gates.
+- Added local QA report for pre-browser, pre-deployment evidence.

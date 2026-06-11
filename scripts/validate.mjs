@@ -15,7 +15,8 @@ const requiredFiles = [
   "CHANGELOG.md",
   "AGENTS.md",
   "docs/COMMUNITY_POST.md",
-  "docs/RELEASE_CHECKLIST.md"
+  "docs/RELEASE_CHECKLIST.md",
+  "docs/LOCAL_QA_REPORT.md"
 ];
 
 const root = process.cwd();
