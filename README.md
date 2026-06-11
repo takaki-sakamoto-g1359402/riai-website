@@ -6,7 +6,7 @@ Premium bilingual landing site and interactive command-center mock dashboard for
 
 - Local build: passing
 - Deployment URL: pending approval and deployment
-- GitHub repository: pending approval and push
+- GitHub repository: pushed to `takaki-sakamoto-g1359402/riai-website`
 - Screenshot: captured locally
 - GitHub Pages workflow: prepared locally
 
@@ -88,8 +88,8 @@ Recommended GitHub Pages flow after approval:
 
 1. Push this repository to GitHub.
 2. Replace the internal community CTA with an approved public repository or discussion URL if that community destination is ready.
-3. In the repository settings, enable GitHub Pages with **GitHub Actions** as the source.
-4. Manually run `.github/workflows/pages.yml` after deployment approval. The workflow runs `npm ci`, `npm run lint`, `npm run build`, `npm run validate`, and `npm run smoke`.
+3. In the repository settings, enable GitHub Pages with **GitHub Actions** as the source if GitHub has not already enabled it during the first deployment.
+4. Push to `main` or manually run `.github/workflows/pages.yml` after deployment approval. The workflow runs `npm ci`, `npm run lint`, `npm run build`, `npm run validate`, and `npm run smoke`.
 5. Verify the public URL opens and the Command Center works.
 
 ## Legal Note

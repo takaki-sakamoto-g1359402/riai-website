@@ -16,7 +16,7 @@ This checklist tracks the remaining approval-gated steps needed to turn the loca
   - `public/screenshots/riai-home.png`
   - `public/screenshots/riai-mobile.png`
 - Hero WebP size: about `108 KB`
-- GitHub Pages workflow: prepared as manual `workflow_dispatch`
+- GitHub Pages workflow: approved for `main` pushes and manual `workflow_dispatch`
 
 ## Approval Gates
 
@@ -44,20 +44,20 @@ Completed:
 
 ### 2. GitHub Repository And Push
 
-Required approval phrase:
+Status: completed after approval.
+
+Original approval phrase:
 
 ```text
 Approve GitHub: create/use public repo <owner>/<repo> and push Riai website
 ```
 
-After approval:
+Completed:
 
-1. Create or select the public GitHub repository.
-2. Add the repository as `origin`.
-3. Push `main`.
-4. If a real public discussion destination is ready, replace the internal community CTA with that approved URL.
-5. Record the repository URL in `README.md`.
-6. Commit documentation or CTA changes if needed.
+1. Created public repository `takaki-sakamoto-g1359402/riai-website`.
+2. Added the repository as `origin`.
+3. Pushed `main`.
+4. Kept the internal community CTA until a real public discussion destination is ready.
 
 ### 3. GitHub Pages Deployment
 
@@ -67,7 +67,9 @@ Required approval phrase for repository settings:
 Approve GitHub Settings: enable GitHub Pages Actions for <owner>/<repo>
 ```
 
-Required approval phrase for deployment workflow:
+Deployment workflow status: approved through the user's blanket approval.
+
+Original approval phrase for deployment workflow:
 
 ```text
 Approve deploy: run GitHub Pages workflow for <owner>/<repo>
@@ -88,7 +90,7 @@ Approve GitHub: push final Riai deployment docs to <owner>/<repo>
 After approval:
 
 1. Enable GitHub Pages with GitHub Actions as the source only after the GitHub Settings approval phrase.
-2. Run the manual `.github/workflows/pages.yml` workflow only after the deploy approval phrase.
+2. Run `.github/workflows/pages.yml` after approval through `main` push or manual dispatch.
 3. Wait for the workflow to complete.
 4. Open and verify the live URL only after the live browser verification approval phrase.
 5. Verify the live page loads assets and Command Center interactions.

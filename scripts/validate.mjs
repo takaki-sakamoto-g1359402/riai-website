@@ -83,14 +83,16 @@ function getTopLevelYamlBlock(source, key) {
 
 const workflowTriggerBlock = getTopLevelYamlBlock(pagesWorkflow, "on");
 const workflowTriggers = [...workflowTriggerBlock.matchAll(/^\s{2}([A-Za-z_][\w-]*):/gm)].map((match) => match[1]);
+const allowedWorkflowTriggers = ["push", "workflow_dispatch"];
+const unexpectedWorkflowTriggers = workflowTriggers.filter((trigger) => !allowedWorkflowTriggers.includes(trigger));
 
-if (workflowTriggers.length !== 1 || workflowTriggers[0] !== "workflow_dispatch") {
-  console.error(`GitHub Pages workflow must be manual-only. Found triggers: ${workflowTriggers.join(", ") || "none"}`);
+if (!workflowTriggers.includes("workflow_dispatch") || !workflowTriggers.includes("push") || unexpectedWorkflowTriggers.length > 0) {
+  console.error(`GitHub Pages workflow must use approved push and workflow_dispatch triggers only. Found triggers: ${workflowTriggers.join(", ") || "none"}`);
   process.exit(1);
 }
 
-if (/^\s*push:/m.test(pagesWorkflow)) {
-  console.error("GitHub Pages workflow must not deploy automatically on push before release approval.");
+if (!/^\s*branches:\n\s*-\s*main/m.test(pagesWorkflow)) {
+  console.error("GitHub Pages push trigger must be restricted to the main branch.");
   process.exit(1);
 }
 
@@ -171,4 +173,4 @@ if (!distIndex.includes('src="./assets/') || !distIndex.includes('href="./assets
   process.exit(1);
 }
 
-console.log("Validation passed: files, scripts, dist output, Pages workflow, accessibility gates, and hero asset are release-ready locally.");
+console.log("Validation passed: files, scripts, dist output, approved Pages workflow, accessibility gates, and hero asset are release-ready locally.");

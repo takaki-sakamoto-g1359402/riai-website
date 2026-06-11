@@ -45,7 +45,7 @@ The latest local `npm run qa` pass observed before this report update completed 
 
 ```text
 eslint . && tsc -b && vite build && node ./scripts/validate.mjs && node ./scripts/smoke-preview.mjs
-Validation passed: files, scripts, dist output, Pages workflow, accessibility gates, and hero asset are release-ready locally.
+Validation passed: files, scripts, dist output, approved Pages workflow, accessibility gates, and hero asset are release-ready locally.
 Smoke preview passed at http://127.0.0.1:4174
 ```
 
@@ -72,7 +72,7 @@ dist/assets/index-sz-qz1K-.js   367.98 kB | gzip: 116.76 kB
   - progressbar semantics on agent progress indicators
   - localized document title, `html.lang`, and meta description updates
   - `prefers-reduced-motion` handling in CSS and Framer Motion config
-- The GitHub Pages workflow is manual-only through `workflow_dispatch`.
+- The GitHub Pages workflow is approved for `main` pushes and manual `workflow_dispatch`.
 - Browser QA opened `http://127.0.0.1:4175/` and verified:
   - page title: `Riai | Transparent Autonomous Agents`
   - no browser console warnings or errors
@@ -83,9 +83,7 @@ dist/assets/index-sz-qz1K-.js   367.98 kB | gzip: 116.76 kB
 
 ## Not Yet Verified
 
-These items require external publishing:
+These items require live deployment verification:
 
-- Public GitHub repository creation or selection
-- Git push
 - GitHub Pages deployment
 - Live URL verification
