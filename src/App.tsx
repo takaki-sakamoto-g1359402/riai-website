@@ -180,7 +180,7 @@ function LanguageToggle({
     <div
       className="grid grid-cols-2 rounded-md border border-ink/15 bg-white/70 p-1 text-xs font-bold text-graphite shadow-sm"
       role="group"
-      aria-label="Language"
+      aria-label={t(copy.a11y.language, lang)}
     >
       {(["en", "ja"] as Lang[]).map((item) => (
         <button
@@ -408,7 +408,7 @@ function CommandCenter({
                 <div
                   className="grid grid-cols-2 gap-2 lg:grid-cols-4"
                   role="tablist"
-                  aria-label={lang === "en" ? "Agent phase" : "エージェント段階"}
+                  aria-label={t(copy.a11y.agentPhase, lang)}
                 >
                   {command.phases.map((phase) => {
                     const Icon = icons[phase.icon];
@@ -425,7 +425,7 @@ function CommandCenter({
                         type="button"
                         role="tab"
                         aria-selected={active}
-                        aria-controls={`phase-panel-${phase.id}`}
+                        aria-controls="phase-panel"
                         id={`phase-tab-${phase.id}`}
                         onClick={() => setActivePhase(phase.id)}
                       >
@@ -438,7 +438,7 @@ function CommandCenter({
               </div>
 
               <div
-                id={`phase-panel-${activePhase}`}
+                id="phase-panel"
                 role="tabpanel"
                 aria-labelledby={`phase-tab-${activePhase}`}
                 className="grid gap-4 p-4 sm:p-6 xl:grid-cols-[1.15fr_0.85fr]"
@@ -860,7 +860,7 @@ function SiteFooter({ lang }: { lang: Lang }) {
           <p className="font-display text-3xl font-medium text-ink">Riai</p>
           <p className="mt-2 max-w-3xl leading-6">{t(copy.footer.legal, lang)}</p>
         </div>
-        <nav className="flex flex-wrap gap-4 font-semibold text-graphite" aria-label="Footer">
+        <nav className="flex flex-wrap gap-4 font-semibold text-graphite" aria-label={t(copy.a11y.footer, lang)}>
           <a href="#product" className="hover:text-ink">
             {t(copy.nav.product, lang)}
           </a>
@@ -904,22 +904,15 @@ function FeatureRow({
 
 function Panel({
   title,
-  action,
   children
 }: {
   title: string;
-  action?: string;
   children: React.ReactNode;
 }) {
   return (
     <section className="rounded-lg border border-ink/10 bg-[#fffdf8] p-4 shadow-sm">
       <div className="mb-4 flex items-center justify-between gap-3">
         <h3 className="text-sm font-extrabold text-ink">{title}</h3>
-        {action && (
-          <button className="text-xs font-bold text-lagoon hover:text-pine" type="button">
-            {action}
-          </button>
-        )}
       </div>
       {children}
     </section>

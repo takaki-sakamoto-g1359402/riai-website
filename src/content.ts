@@ -89,7 +89,10 @@ export const copy = {
     skip: { en: "Skip to content", ja: "本文へ移動" },
     home: { en: "Riai home", ja: "Riai ホーム" },
     openMenu: { en: "Open menu", ja: "メニューを開く" },
-    closeMenu: { en: "Close menu", ja: "メニューを閉じる" }
+    closeMenu: { en: "Close menu", ja: "メニューを閉じる" },
+    language: { en: "Language", ja: "言語" },
+    agentPhase: { en: "Agent phase", ja: "エージェント段階" },
+    footer: { en: "Footer", ja: "フッター" }
   },
   nav: {
     product: { en: "Product", ja: "プロダクト" },
@@ -333,7 +336,6 @@ export const command = {
     en: "A transparent operating surface for agents that plan, act, reflect, and learn.",
     ja: "計画、実行、内省、学習を見える状態で扱うエージェント運用画面。"
   },
-  viewAll: { en: "View all", ja: "すべて表示" },
   systemStatus: { en: "All systems in simulation mode", ja: "全システムはシミュレーションモード" },
   sidebar: {
     commandCenter: { en: "Command Center", ja: "Command Center" },

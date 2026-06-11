@@ -6,11 +6,12 @@ This checklist tracks the remaining approval-gated steps needed to turn the loca
 
 - Repository path: `/Users/sakamototakaki/Documents/New project/riai-website`
 - Latest local commit: run `git log --oneline -1` in this repository before release.
-- Local checks passed:
+- Required local release check:
   - `npm run qa`
-- Production preview HTTP check passed locally:
+- Production preview HTTP check is covered by `npm run smoke` inside `npm run qa`:
   - `GET /` returned `200 OK`
   - `GET /assets/riai-core.webp` returned `200 OK`
+  - `GET /assets/riai-core.png` returned `200 OK`
 - Hero WebP size: about `108 KB`
 - GitHub Pages workflow: prepared as manual `workflow_dispatch`
 

@@ -23,7 +23,7 @@ This report records current local evidence for the Riai website before browser s
 
 ## Command Evidence
 
-These commands passed in the current local environment before this report was committed:
+These commands are the current local QA command set:
 
 ```bash
 npm run lint
@@ -39,12 +39,20 @@ npm run qa
 
 `npm run qa` is the preferred local release check because it runs lint, rebuilds `dist/`, validates release invariants, and then runs smoke checks in order.
 
+The latest local `npm run qa` pass observed before this report update completed successfully with:
+
+```text
+eslint . && tsc -b && vite build && node ./scripts/validate.mjs && node ./scripts/smoke-preview.mjs
+Validation passed: files, scripts, dist output, Pages workflow, and hero asset are release-ready locally.
+Smoke preview passed at http://127.0.0.1:4174
+```
+
 The latest observed build output was:
 
 ```text
 dist/index.html                   0.66 kB | gzip:   0.39 kB
-dist/assets/index-vGZbVxtF.css   20.64 kB | gzip:   5.01 kB
-dist/assets/index-BNofOreA.js   366.68 kB | gzip: 116.22 kB
+dist/assets/index-Dlyxafgd.css   20.55 kB | gzip:   5.01 kB
+dist/assets/index-hE1zZS0y.js   366.68 kB | gzip: 116.23 kB
 ```
 
 ## Feature Evidence From Source
