@@ -38,6 +38,14 @@ if (heroAsset.size > maxAssetBytes) {
   process.exit(1);
 }
 
+const heroFallbackAsset = statSync(join(root, "public/assets/riai-core.png"));
+const maxFallbackBytes = 750 * 1024;
+
+if (heroFallbackAsset.size > maxFallbackBytes) {
+  console.error(`Hero PNG fallback is too large: ${heroFallbackAsset.size} bytes`);
+  process.exit(1);
+}
+
 const packageJson = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
 const requiredScripts = ["dev", "build", "preview", "lint", "validate"];
 const missingScripts = requiredScripts.filter((script) => !packageJson.scripts?.[script]);

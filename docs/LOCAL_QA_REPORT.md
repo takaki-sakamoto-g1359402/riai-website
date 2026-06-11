@@ -17,6 +17,9 @@ This report records current local evidence for the Riai website before browser s
 - Hero asset is available as optimized WebP:
   - `public/assets/riai-core.webp`
   - approximately `108 KB`
+- PNG fallback is optimized for static delivery:
+  - `public/assets/riai-core.png`
+  - below `750 KB`
 
 ## Command Evidence
 
@@ -28,7 +31,7 @@ npm run build
 npm run validate
 ```
 
-`npm run validate` now checks required source files, required package scripts, generated `dist/` output, relative build asset references, manual-only GitHub Pages workflow settings, and the lightweight hero asset size.
+`npm run validate` now checks required source files, required package scripts, generated `dist/` output, relative build asset references, manual-only GitHub Pages workflow settings, lightweight WebP size, and PNG fallback size.
 
 The latest observed build output was:
 

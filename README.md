@@ -17,6 +17,7 @@ Riai should feel warm, precise, futuristic, trustworthy, and quietly powerful. T
 - Pearl and celadon surfaces with graphite typography
 - A deep blue-green command rail for operational contrast
 - Lightweight glass/depth panels and a generated computational-core hero asset
+- Optimized WebP hero media with a compressed PNG fallback
 - Editorial scale in marketing sections, denser operational UI inside the Command Center
 - Visible state, memory, task, safety, and rule surfaces so the simulated agent behavior stays inspectable
 
@@ -47,7 +48,7 @@ npm run dev       # Start development server
 npm run build     # Type-check and create static dist/
 npm run preview   # Preview the production build locally
 npm run lint      # Run ESLint
-npm run validate  # Confirm key files, scripts, dist output, Pages workflow, and lightweight hero asset
+npm run validate  # Confirm key files, scripts, dist output, Pages workflow, and hero asset budgets
 ```
 
 ## Interactions
