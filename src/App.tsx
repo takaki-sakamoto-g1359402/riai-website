@@ -19,6 +19,10 @@ function cx(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
 }
 
+function assetUrl(path: string) {
+  return `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
+}
+
 export default function App() {
   const [lang, setLang] = useState<Lang>("en");
   const [activePhase, setActivePhase] = useState<PhaseId>("plan");
@@ -42,7 +46,7 @@ export default function App() {
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-ink focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
           href="#main"
         >
-          Skip to content
+          {t(copy.a11y.skip, lang)}
         </a>
         <SiteHeader
           lang={lang}
@@ -95,7 +99,7 @@ function SiteHeader({
         <a
           className="font-display text-2xl font-medium tracking-normal text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lagoon"
           href="#top"
-          aria-label="Riai home"
+          aria-label={t(copy.a11y.home, lang)}
         >
           Riai
         </a>
@@ -125,7 +129,7 @@ function SiteHeader({
           type="button"
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-label={menuOpen ? t(copy.a11y.closeMenu, lang) : t(copy.a11y.openMenu, lang)}
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <X size={19} /> : <Menu size={19} />}
@@ -197,6 +201,9 @@ function LanguageToggle({
 }
 
 function Hero({ lang }: { lang: Lang }) {
+  const coreWebp = assetUrl("assets/riai-core.webp");
+  const corePng = assetUrl("assets/riai-core.png");
+
   return (
     <section id="top" className="relative pt-24 sm:pt-28">
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(20,32,31,0.07)_1px,transparent_1px),linear-gradient(180deg,rgba(20,32,31,0.05)_1px,transparent_1px)] bg-[size:72px_72px]" />
@@ -242,10 +249,10 @@ function Hero({ lang }: { lang: Lang }) {
           <div className="absolute inset-x-8 bottom-4 h-20 bg-[linear-gradient(90deg,transparent,rgba(15,57,52,0.18),transparent)] blur-2xl" />
           <div className="relative mx-auto max-w-[560px] overflow-hidden rounded-lg border border-white/70 bg-white/35 shadow-glass backdrop-blur">
             <picture>
-              <source srcSet="/assets/riai-core.webp" type="image/webp" />
+              <source srcSet={coreWebp} type="image/webp" />
               <img
                 className="aspect-[5/6] h-auto w-full object-cover"
-                src="/assets/riai-core.png"
+                src={corePng}
                 alt={t(copy.hero.visualAlt, lang)}
                 decoding="async"
                 fetchPriority="high"
@@ -326,6 +333,21 @@ function CommandCenter({
   setActivePhase: (phase: PhaseId) => void;
 }) {
   const ActiveIcon = icons[activePhaseData.icon];
+  const [memoryQuery, setMemoryQuery] = useState("");
+  const visibleMemories = command.memories.filter((memory) => {
+    const query = memoryQuery.trim().toLowerCase();
+    if (!query) {
+      return true;
+    }
+
+    return `${t(memory.title, "en")} ${t(memory.title, "ja")}`.toLowerCase().includes(query);
+  });
+  const sidebarItems = [
+    { icon: ShieldCheck, label: command.sidebar.commandCenter, active: true },
+    { icon: Search, label: command.sidebar.agents, active: false },
+    { icon: Check, label: command.sidebar.tasks, active: false },
+    { icon: ExternalLink, label: command.sidebar.memory, active: false }
+  ];
 
   return (
     <section id="command" className="bg-[#f8f7f2] py-20">
@@ -353,27 +375,22 @@ function CommandCenter({
                 <p className="font-display text-3xl font-medium">Riai</p>
                 <Bell size={18} className="text-celadon" aria-hidden="true" />
               </div>
-              <nav className="mt-8 grid gap-2 text-sm font-semibold" aria-label="Command sections">
-                {[
-                  [ShieldCheck, "Command Center"],
-                  [Search, "Agents"],
-                  [Check, "Tasks"],
-                  [ExternalLink, "Memory"]
-                ].map(([Icon, label]) => {
-                  const TypedIcon = Icon as typeof ShieldCheck;
+              <nav className="mt-8 grid gap-2 text-sm font-semibold" aria-label={t(command.sidebar.navigation, lang)}>
+                {sidebarItems.map((item) => {
+                  const TypedIcon = item.icon;
                   return (
                     <a
-                      key={label as string}
+                      key={t(item.label, "en")}
                       className={cx(
                         "flex items-center gap-3 rounded-md px-3 py-3 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-celadon",
-                        label === "Command Center"
+                        item.active
                           ? "bg-white/13 text-white"
                           : "text-white/72 hover:bg-white/9 hover:text-white"
                       )}
                       href="#command"
                     >
                       <TypedIcon size={17} aria-hidden="true" />
-                      {label as string}
+                      {t(item.label, lang)}
                     </a>
                   );
                 })}
@@ -391,7 +408,7 @@ function CommandCenter({
                 <div
                   className="grid grid-cols-2 gap-2 lg:grid-cols-4"
                   role="tablist"
-                  aria-label="Agent phase"
+                  aria-label={lang === "en" ? "Agent phase" : "エージェント段階"}
                 >
                   {command.phases.map((phase) => {
                     const Icon = icons[phase.icon];
@@ -408,6 +425,8 @@ function CommandCenter({
                         type="button"
                         role="tab"
                         aria-selected={active}
+                        aria-controls={`phase-panel-${phase.id}`}
+                        id={`phase-tab-${phase.id}`}
                         onClick={() => setActivePhase(phase.id)}
                       >
                         <Icon size={17} aria-hidden="true" />
@@ -418,12 +437,14 @@ function CommandCenter({
                 </div>
               </div>
 
-              <div className="grid gap-4 p-4 sm:p-6 xl:grid-cols-[1.15fr_0.85fr]">
+              <div
+                id={`phase-panel-${activePhase}`}
+                role="tabpanel"
+                aria-labelledby={`phase-tab-${activePhase}`}
+                className="grid gap-4 p-4 sm:p-6 xl:grid-cols-[1.15fr_0.85fr]"
+              >
                 <div className="grid gap-4">
-                  <Panel
-                    title={t(command.labels.activeAgents, lang)}
-                    action={t(command.viewAll, lang)}
-                  >
+                  <Panel title={t(command.labels.activeAgents, lang)}>
                     <div className="grid gap-3 md:grid-cols-3">
                       {command.agents.map((agent) => (
                         <AgentCard key={t(agent.name, "en")} agent={agent} lang={lang} />
@@ -465,7 +486,7 @@ function CommandCenter({
                 </div>
 
                 <div className="grid gap-4">
-                  <Panel title={t(command.labels.safetyChecks, lang)} action={t(command.viewAll, lang)}>
+                  <Panel title={t(command.labels.safetyChecks, lang)}>
                     <div className="space-y-2">
                       {command.safetyChecks.map((check) => (
                         <div
@@ -492,19 +513,21 @@ function CommandCenter({
 
                   <Panel title={t(command.labels.memory, lang)}>
                     <label className="sr-only" htmlFor="memory-search">
-                      Search memory
+                      {t(command.memorySearch.label, lang)}
                     </label>
                     <div className="mb-4 flex items-center gap-2 rounded-md border border-ink/10 bg-white px-3 py-2">
                       <Search size={16} className="text-graphite/55" aria-hidden="true" />
                       <input
                         id="memory-search"
                         className="w-full bg-transparent text-sm outline-none placeholder:text-graphite/45"
-                        placeholder={lang === "en" ? "Search visible memory" : "見える記憶を検索"}
+                        placeholder={t(command.memorySearch.placeholder, lang)}
                         type="search"
+                        value={memoryQuery}
+                        onChange={(event) => setMemoryQuery(event.target.value)}
                       />
                     </div>
                     <div className="space-y-2">
-                      {command.memories.map((memory) => (
+                      {visibleMemories.map((memory) => (
                         <div
                           key={t(memory.title, "en")}
                           className="flex items-start justify-between gap-3 border-b border-ink/8 pb-2 last:border-b-0"
@@ -513,6 +536,11 @@ function CommandCenter({
                           <span className="shrink-0 text-xs text-graphite/50">{t(memory.time, lang)}</span>
                         </div>
                       ))}
+                      {visibleMemories.length === 0 && (
+                        <p className="rounded-md border border-ink/8 bg-white px-3 py-3 text-sm text-graphite/62">
+                          {t(command.memorySearch.empty, lang)}
+                        </p>
+                      )}
                     </div>
                   </Panel>
 
@@ -686,11 +714,9 @@ function Architecture({ lang }: { lang: Lang }) {
               })}
             </div>
             <div className="mt-4 rounded-lg border border-lagoon/18 bg-celadon/13 p-5">
-              <p className="text-sm font-bold text-pine">Memory + Safety Layer</p>
+              <p className="text-sm font-bold text-pine">{t(command.memorySafetyLayer.title, lang)}</p>
               <p className="mt-2 text-sm leading-6 text-graphite/72">
-                {lang === "en"
-                  ? "Every phase reads from explicit memory and writes an auditable reason before changing future behavior."
-                  : "各フェーズは明示記憶を読み、将来の挙動を変える前に監査可能な理由を書き込みます。"}
+                {t(command.memorySafetyLayer.text, lang)}
               </p>
             </div>
           </div>

@@ -34,6 +34,8 @@ Reference sites were used only for abstract patterns such as information archite
 
 ## Setup
 
+Node.js 22 or newer is recommended. The CI workflow uses Node 22.
+
 ```bash
 npm install
 npm run dev
@@ -49,6 +51,8 @@ npm run build     # Type-check and create static dist/
 npm run preview   # Preview the production build locally
 npm run lint      # Run ESLint
 npm run validate  # Confirm key files, scripts, dist output, Pages workflow, and hero asset budgets
+npm run smoke     # Start production preview and verify HTML/assets over HTTP
+npm run qa        # Run lint, build, validate, and smoke in release order
 ```
 
 ## Interactions
@@ -76,12 +80,13 @@ Run `npm run build` before `npm run validate` because validation checks the gene
 
 Approval-gated release steps are tracked in [`docs/RELEASE_CHECKLIST.md`](docs/RELEASE_CHECKLIST.md).
 Current non-browser QA evidence is tracked in [`docs/LOCAL_QA_REPORT.md`](docs/LOCAL_QA_REPORT.md).
+`npm run smoke` verifies the local production preview without opening a browser; visual QA still requires the browser approval gate. Use `npm run qa` before release because it rebuilds `dist/` before validation and smoke checks.
 
 Recommended GitHub Pages flow after approval:
 
 1. Push this repository to GitHub.
 2. In the repository settings, enable GitHub Pages with **GitHub Actions** as the source.
-3. Manually run `.github/workflows/pages.yml` after deployment approval. The workflow runs `npm ci`, `npm run lint`, `npm run build`, and `npm run validate`.
+3. Manually run `.github/workflows/pages.yml` after deployment approval. The workflow runs `npm ci`, `npm run lint`, `npm run build`, `npm run validate`, and `npm run smoke`.
 4. Verify the public URL opens and the Command Center works.
 
 ## Legal Note

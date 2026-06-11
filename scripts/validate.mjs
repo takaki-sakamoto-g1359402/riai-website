@@ -7,6 +7,7 @@ const requiredFiles = [
   "src/App.tsx",
   "src/content.ts",
   "src/index.css",
+  "public/assets/riai-core.png",
   "public/assets/riai-core.webp",
   "public/.nojekyll",
   ".github/workflows/pages.yml",
@@ -16,7 +17,8 @@ const requiredFiles = [
   "AGENTS.md",
   "docs/COMMUNITY_POST.md",
   "docs/RELEASE_CHECKLIST.md",
-  "docs/LOCAL_QA_REPORT.md"
+  "docs/LOCAL_QA_REPORT.md",
+  "scripts/smoke-preview.mjs"
 ];
 
 const root = process.cwd();
@@ -47,7 +49,7 @@ if (heroFallbackAsset.size > maxFallbackBytes) {
 }
 
 const packageJson = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
-const requiredScripts = ["dev", "build", "preview", "lint", "validate"];
+const requiredScripts = ["dev", "build", "preview", "lint", "validate", "smoke", "qa"];
 const missingScripts = requiredScripts.filter((script) => !packageJson.scripts?.[script]);
 
 if (missingScripts.length > 0) {
@@ -60,8 +62,30 @@ if (missingScripts.length > 0) {
 
 const pagesWorkflow = readFileSync(join(root, ".github/workflows/pages.yml"), "utf8");
 
-if (!pagesWorkflow.includes("workflow_dispatch:")) {
-  console.error("GitHub Pages workflow must remain manually triggered with workflow_dispatch.");
+function getTopLevelYamlBlock(source, key) {
+  const lines = source.split(/\r?\n/);
+  const startIndex = lines.findIndex((line) => line === `${key}:`);
+
+  if (startIndex === -1) {
+    return "";
+  }
+
+  const block = [];
+  for (const line of lines.slice(startIndex + 1)) {
+    if (line.length > 0 && !/^\s/.test(line)) {
+      break;
+    }
+    block.push(line);
+  }
+
+  return block.join("\n");
+}
+
+const workflowTriggerBlock = getTopLevelYamlBlock(pagesWorkflow, "on");
+const workflowTriggers = [...workflowTriggerBlock.matchAll(/^\s{2}([A-Za-z_][\w-]*):/gm)].map((match) => match[1]);
+
+if (workflowTriggers.length !== 1 || workflowTriggers[0] !== "workflow_dispatch") {
+  console.error(`GitHub Pages workflow must be manual-only. Found triggers: ${workflowTriggers.join(", ") || "none"}`);
   process.exit(1);
 }
 
@@ -70,15 +94,23 @@ if (/^\s*push:/m.test(pagesWorkflow)) {
   process.exit(1);
 }
 
-if (!pagesWorkflow.includes("npm run lint") || !pagesWorkflow.includes("npm run build") || !pagesWorkflow.includes("npm run validate")) {
-  console.error("GitHub Pages workflow must run lint, build, and validate.");
+if (!pagesWorkflow.includes("npm run lint") || !pagesWorkflow.includes("npm run build") || !pagesWorkflow.includes("npm run validate") || !pagesWorkflow.includes("npm run smoke")) {
+  console.error("GitHub Pages workflow must run lint, build, validate, and smoke.");
+  process.exit(1);
+}
+
+const appSource = readFileSync(join(root, "src/App.tsx"), "utf8");
+
+if (appSource.includes('"/assets/') || appSource.includes("'/assets/")) {
+  console.error("src/App.tsx must not use root-absolute /assets paths; use import.meta.env.BASE_URL-safe asset paths.");
   process.exit(1);
 }
 
 const distFiles = [
   "dist/index.html",
   "dist/.nojekyll",
-  "dist/assets/riai-core.webp"
+  "dist/assets/riai-core.webp",
+  "dist/assets/riai-core.png"
 ];
 const missingDist = distFiles.filter((file) => !existsSync(join(root, file)));
 

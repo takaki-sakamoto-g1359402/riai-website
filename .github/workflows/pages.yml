@@ -37,6 +37,9 @@ jobs:
       - name: Validate
         run: npm run validate
 
+      - name: Smoke preview
+        run: npm run smoke
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 

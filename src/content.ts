@@ -85,6 +85,12 @@ export const copy = {
       ja: "Riai | 透明な自律エージェント"
     }
   },
+  a11y: {
+    skip: { en: "Skip to content", ja: "本文へ移動" },
+    home: { en: "Riai home", ja: "Riai ホーム" },
+    openMenu: { en: "Open menu", ja: "メニューを開く" },
+    closeMenu: { en: "Close menu", ja: "メニューを閉じる" }
+  },
   nav: {
     product: { en: "Product", ja: "プロダクト" },
     architecture: { en: "Architecture", ja: "構造" },
@@ -329,6 +335,25 @@ export const command = {
   },
   viewAll: { en: "View all", ja: "すべて表示" },
   systemStatus: { en: "All systems in simulation mode", ja: "全システムはシミュレーションモード" },
+  sidebar: {
+    commandCenter: { en: "Command Center", ja: "Command Center" },
+    agents: { en: "Agents", ja: "エージェント" },
+    tasks: { en: "Tasks", ja: "タスク" },
+    memory: { en: "Memory", ja: "記憶" },
+    navigation: { en: "Command sections", ja: "Command セクション" }
+  },
+  memorySearch: {
+    label: { en: "Search memory", ja: "記憶を検索" },
+    placeholder: { en: "Search visible memory", ja: "見える記憶を検索" },
+    empty: { en: "No visible memory matched.", ja: "一致する見える記憶はありません。" }
+  },
+  memorySafetyLayer: {
+    title: { en: "Memory + Safety Layer", ja: "記憶 + 安全レイヤー" },
+    text: {
+      en: "Every phase reads from explicit memory and writes an auditable reason before changing future behavior.",
+      ja: "各フェーズは明示記憶を読み、将来の挙動を変える前に監査可能な理由を書き込みます。"
+    }
+  },
   phases: [
     {
       id: "plan",

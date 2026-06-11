@@ -7,8 +7,8 @@ This report records current local evidence for the Riai website before browser s
 ## Verified Locally
 
 - Repository path: `/Users/sakamototakaki/Documents/New project/riai-website`
-- Latest local commit at time of report creation: `b776101 docs: avoid stale release checklist sha`
-- Working tree was clean before this report was added.
+- Latest local commit should be checked with `git log --oneline -1` before release.
+- Working tree should be checked with `git status --short` before release.
 - No Git remote was configured.
 - No screenshot file existed under `public/screenshots/`.
 - Static build artifacts existed under `dist/`.
@@ -29,16 +29,22 @@ These commands passed in the current local environment before this report was co
 npm run lint
 npm run build
 npm run validate
+npm run smoke
+npm run qa
 ```
 
-`npm run validate` now checks required source files, required package scripts, generated `dist/` output, relative build asset references, manual-only GitHub Pages workflow settings, lightweight WebP size, and PNG fallback size.
+`npm run validate` now checks required source files, required package scripts, generated `dist/` output, relative build asset references, manual-only GitHub Pages workflow settings, lightweight WebP size, PNG fallback size, and the preview smoke script.
+
+`npm run smoke` starts a local Vite production preview, verifies the landing HTML, and confirms the WebP and PNG hero assets return `200 OK` with expected content types and size budgets. It does not open a browser and does not replace visual QA.
+
+`npm run qa` is the preferred local release check because it runs lint, rebuilds `dist/`, validates release invariants, and then runs smoke checks in order.
 
 The latest observed build output was:
 
 ```text
 dist/index.html                   0.66 kB | gzip:   0.39 kB
 dist/assets/index-vGZbVxtF.css   20.64 kB | gzip:   5.01 kB
-dist/assets/index-BFB6Bqs8.js   365.24 kB | gzip: 115.80 kB
+dist/assets/index-BNofOreA.js   366.68 kB | gzip: 116.22 kB
 ```
 
 ## Feature Evidence From Source

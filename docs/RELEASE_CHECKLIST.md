@@ -7,9 +7,7 @@ This checklist tracks the remaining approval-gated steps needed to turn the loca
 - Repository path: `/Users/sakamototakaki/Documents/New project/riai-website`
 - Latest local commit: run `git log --oneline -1` in this repository before release.
 - Local checks passed:
-  - `npm run lint`
-  - `npm run build`
-  - `npm run validate`
+  - `npm run qa`
 - Production preview HTTP check passed locally:
   - `GET /` returned `200 OK`
   - `GET /assets/riai-core.webp` returned `200 OK`
@@ -37,7 +35,7 @@ After approval:
 5. Verify Command Center phase tabs: `Plan`, `Act`, `Reflect`, `Learn`.
 6. Capture at least one screenshot to `public/screenshots/riai-home.png`.
 7. Update `README.md` and `docs/COMMUNITY_POST.md` with the screenshot path.
-8. Run `npm run lint`, `npm run build`, and `npm run validate`.
+8. Run `npm run qa`.
 9. Commit the screenshot and documentation update.
 
 ### 2. GitHub Repository And Push
@@ -58,21 +56,40 @@ After approval:
 
 ### 3. GitHub Pages Deployment
 
-Required approval phrase:
+Required approval phrase for repository settings:
+
+```text
+Approve GitHub Settings: enable GitHub Pages Actions for <owner>/<repo>
+```
+
+Required approval phrase for deployment workflow:
 
 ```text
 Approve deploy: run GitHub Pages workflow for <owner>/<repo>
 ```
 
+Required approval phrase for live browser verification:
+
+```text
+Approve browser: open live Riai URL <url> and verify deployment
+```
+
+Required approval phrase for final documentation push:
+
+```text
+Approve GitHub: push final Riai deployment docs to <owner>/<repo>
+```
+
 After approval:
 
-1. Enable GitHub Pages with GitHub Actions as the source if needed.
-2. Run the manual `.github/workflows/pages.yml` workflow.
+1. Enable GitHub Pages with GitHub Actions as the source only after the GitHub Settings approval phrase.
+2. Run the manual `.github/workflows/pages.yml` workflow only after the deploy approval phrase.
 3. Wait for the workflow to complete.
-4. Verify the live URL opens.
+4. Open and verify the live URL only after the live browser verification approval phrase.
 5. Verify the live page loads assets and Command Center interactions.
 6. Record the live URL in `README.md` and `docs/COMMUNITY_POST.md`.
-7. Commit and push final documentation updates.
+7. Commit final documentation updates locally.
+8. Push final documentation updates only after the final documentation push approval phrase.
 
 ## Completion Evidence Needed
 
@@ -84,4 +101,5 @@ The goal is complete only when all of the following are proven:
 - README contains setup, design direction, interactions, screenshot path, deployment URL, and legal note.
 - Community post contains English and Japanese devlog with screenshot and live URL references.
 - Local and CI checks pass.
+- Local preview smoke check passes.
 - Browser verification confirms the live site works.
