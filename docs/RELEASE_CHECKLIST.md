@@ -5,7 +5,7 @@ This checklist tracks the remaining approval-gated steps needed to turn the loca
 ## Current Local Evidence
 
 - Repository path: `/Users/sakamototakaki/Documents/New project/riai-website`
-- Latest local commit: `2f71680 chore: prepare manual github pages deployment`
+- Latest local commit: `c12a3d0 docs: add approval gated release checklist`
 - Local checks passed:
   - `npm run lint`
   - `npm run build`
